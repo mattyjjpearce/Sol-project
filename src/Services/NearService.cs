@@ -46,7 +46,8 @@ public class NearService
         //Convert response from array of ASCII characters into a string
 
         var jsonResult = JObject.Parse(responseBody);
-        var resultArray = jsonResult["result"]["result"].ToObject<byte[]>();        var resultString = Encoding.ASCII.GetString(resultArray);
+        var resultArray = jsonResult["result"]["result"].ToObject<byte[]>();
+        var resultString = Encoding.ASCII.GetString(resultArray);
         
         return resultString;
     }
@@ -85,7 +86,8 @@ public class NearService
 
 
         var jsonResult = JObject.Parse(responseBody);
-        var resultArray = jsonResult["result"]["result"].ToObject<byte[]>();        var resultString = Encoding.ASCII.GetString(resultArray);
+        var resultArray = jsonResult["result"]["result"].ToObject<byte[]>();
+        var resultString = Encoding.ASCII.GetString(resultArray);
         
         return resultString;
     }
