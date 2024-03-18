@@ -1,8 +1,4 @@
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
-// using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Text.Json;
 
 
@@ -39,17 +35,20 @@ public class NearService
         var content = new StringContent(json, Encoding.UTF8, "application/json");    
         
         //Send request to NEAR
-        var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
-        response.EnsureSuccessStatusCode();
+        try
+        {
+            var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
+            response.EnsureSuccessStatusCode();
 
-        var responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
-        var nearResponse = JsonSerializer.Deserialize<NearResponse>(responseBody);
-
-        var resultArray = nearResponse?.Result?.Result?.ToArray();
-        var resultString = resultArray != null ? Encoding.ASCII.GetString(resultArray.Select(Convert.ToByte).ToArray()) : string.Empty;
-        
-        return resultString;
+            return Formatter.FormatResponseData(responseBody);          
+        } 
+        catch(Exception e)
+        {
+            return e.Message;
+        }
+       
     }
 
     public async Task<string> GetFtBalanceAsync(string id)
@@ -79,18 +78,21 @@ public class NearService
         var json = JsonSerializer.Serialize(rpcPayload);  
         var content = new StringContent(json, Encoding.UTF8, "application/json");    
         
-        //Sent request to NEAR
-        var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
-  
-        response.EnsureSuccessStatusCode(); 
+        //Send request to NEAR
+        try
+        {
+            var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
+            response.EnsureSuccessStatusCode(); 
 
-       var responseBody = await response.Content.ReadAsStringAsync();
-       var nearResponse = JsonSerializer.Deserialize<NearResponse>(responseBody);
+            var responseBody = await response.Content.ReadAsStringAsync();
+            return Formatter.FormatResponseData(responseBody); 
 
-        var resultArray = nearResponse?.Result?.Result?.ToArray();
-        var resultString = resultArray != null ? Encoding.ASCII.GetString(resultArray.Select(Convert.ToByte).ToArray()) : string.Empty;
-        
-        return resultString;
+        }
+        catch(Exception e)
+        {
+            return e.Message;
+        }
+   
     }
 
 

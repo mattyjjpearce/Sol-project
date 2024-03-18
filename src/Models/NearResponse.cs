@@ -14,9 +14,9 @@ public class NearResponse
 
 public class NearResponseResult
 {
-    public NearResponseResult(string blockhash, int blockheight, List<string> logs, List<int> result, string id){
-        BlockHash = blockhash;
-        BlockHeight = blockheight;
+    public NearResponseResult(string blockHash, int blockHeight, List<string> logs, List<int> result, string id){
+        BlockHash = blockHash;
+        BlockHeight = blockHeight;
         Logs = logs;
         Result = result;
         Id = id;
