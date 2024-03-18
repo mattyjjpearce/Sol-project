@@ -47,9 +47,6 @@ public class NearService
 
     public async Task<string> GetFtBalanceAsync(string id)
     {
-
-        //Basically all of this logic can be stripped away into a helper function which can be called here and in method above. Leaving for now as just in prototyping phase. 
-
         string base64ConvertedString = Encoder.convertToBase64(id);
        
         var rpcPayload = new NearRequest()
