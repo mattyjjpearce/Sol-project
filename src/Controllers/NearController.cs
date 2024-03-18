@@ -13,6 +13,8 @@ public class NearController : ControllerBase
         _nearService = nearService;
     }
 
+    
+
     [HttpGet("metadata")]
     public async Task<IActionResult> GetFtMetadata()
     {

@@ -45,11 +45,10 @@ public class NearService
 
         var responseBody = await response.Content.ReadAsStringAsync();
 
-        //Convert response from array of ASCII characters into a string
-
+        // Convert response from array of ASCII characters into a string
         var jsonResult = JObject.Parse(responseBody);       
-        var resultArray = jsonResult["result"]["result"].ToObject<byte[]>();
-        var resultString = Encoding.ASCII.GetString(resultArray);      
+        var resultArray = jsonResult?["result"]?["result"]?.ToObject<byte[]>();
+        var resultString = resultArray != null ? Encoding.ASCII.GetString(resultArray) : string.Empty;
         
         return resultString;
     }
@@ -86,12 +85,9 @@ public class NearService
 
         var responseBody = await response.Content.ReadAsStringAsync();
 
-        Console.WriteLine(responseBody);
-
-
         var jsonResult = JObject.Parse(responseBody);
-        var resultArray = jsonResult["result"]["result"].ToObject<byte[]>();
-        var resultString = Encoding.ASCII.GetString(resultArray);
+         var resultArray = jsonResult?["result"]?["result"]?.ToObject<byte[]>();
+        var resultString = resultArray != null ? Encoding.ASCII.GetString(resultArray) : string.Empty;
         
         return resultString;
     }
