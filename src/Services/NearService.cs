@@ -14,16 +14,10 @@ public class NearService
 
   public async Task<string> GetFtMetadataAsync()
     {
-
-        var rpcPayload = new NearRequest(
-            jsonrpc: "2.0",
-            id: "dontcare",
-            method: "query"
-        ){
+        var rpcPayload = new NearRequest(){
             @Params = new NearRequestParams(
                 requestType: "call_function", methodName: "ft_metadata",
                 finality: "final",
-                accountId: "absurd-pet.testnet",
                 argsBase64: "e30="
             )
         };
@@ -58,27 +52,19 @@ public class NearService
 
         string base64ConvertedString = Encoder.convertToBase64(id);
        
-        var rpcPayload = new NearRequest
-        (
-            jsonrpc: "2.0",
-            id: "dontcare",
-            method: "query"
-        )
+        var rpcPayload = new NearRequest()
         {
             @Params = new NearRequestParams(
                 requestType: "call_function",
-                methodName: "ft_balance_of",           
+                methodName: "ft_balance_of",
                 finality: "final", 
-                accountId: "absurd-pet.testnet",
-                argsBase64: base64ConvertedString                
-            
+                argsBase64: base64ConvertedString              
             )
         };
 
         var json = JsonSerializer.Serialize(rpcPayload);  
         var content = new StringContent(json, Encoding.UTF8, "application/json");    
         
-        //Send request to NEAR
         try
         {
             var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
@@ -94,7 +80,5 @@ public class NearService
         }
    
     }
-
-
 
 }

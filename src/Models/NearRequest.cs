@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 public class NearRequest
 {
  
-        public NearRequest(string jsonrpc, string id, string method)
+        public NearRequest(string jsonrpc = "2.0", string id="dontcare", string method = "query")
         {
             Jsonrpc = jsonrpc;
             Id = id;
@@ -26,7 +26,9 @@ public class NearRequest
 
 public class NearRequestParams
 {
-    public NearRequestParams(string requestType, string methodName, string finality, string accountId, string argsBase64)
+    public NearRequestParams(
+        string requestType, string methodName, string finality, string argsBase64,  string accountId = "absurd-pet.testnet"
+    )
     {
         RequestType = requestType;
         MethodName = methodName;
