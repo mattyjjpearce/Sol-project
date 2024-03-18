@@ -1,6 +1,5 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers(); 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -11,7 +10,7 @@ builder.Services.AddScoped<NearService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -19,8 +18,8 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseRouting(); // Use routing middleware
-app.MapControllers(); // Map attribute-routed controllers
+app.UseRouting(); 
+app.MapControllers(); 
 
 
 app.Run();
