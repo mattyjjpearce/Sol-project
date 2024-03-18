@@ -17,12 +17,12 @@ public class NearService
 
   public async Task<string> GetFtMetadataAsync()
     {
-        var rpcPayload = new
+        var rpcPayload = new NearRequest
         {
             jsonrpc = "2.0",
             id = "dontcare",
             method = "query",
-            @params = new
+            @params = new NearRequestParams
             {
                 request_type = "call_function",
                 method_name = "ft_metadata",           
@@ -39,9 +39,10 @@ public class NearService
         //Format content for sending
         var content = new StringContent(json, Encoding.UTF8, "application/json");    
         
-        //Sent request to NEAR
+        //Send request to NEAR
         var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
         response.EnsureSuccessStatusCode(); 
+
 
         var responseBody = await response.Content.ReadAsStringAsync();
 
@@ -59,13 +60,13 @@ public class NearService
         //Basically all of this logic can be stripped away into a helper function which can be called here and in method above. Leaving for now as just in prototyping phase. 
 
         string base64ConvertedString = Encoder.convertToBase64(id);
-        Console.WriteLine(base64ConvertedString);
-         var rpcPayload = new
+       
+         var rpcPayload = new NearRequest
         {
             jsonrpc = "2.0",
             id = "dontcare",
             method = "query",
-            @params = new
+            @params = new NearRequestParams
             {
                 request_type = "call_function",
                 method_name = "ft_balance_of",           
@@ -80,7 +81,7 @@ public class NearService
         
         //Sent request to NEAR
         var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
-        Console.WriteLine(response);
+  
         response.EnsureSuccessStatusCode(); 
 
         var responseBody = await response.Content.ReadAsStringAsync();

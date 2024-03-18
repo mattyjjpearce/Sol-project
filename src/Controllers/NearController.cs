@@ -26,7 +26,6 @@ public class NearController : ControllerBase
     [HttpGet("{id}/balance")]
     public async Task<IActionResult> GetBalance(string id)
     {
-        Console.WriteLine(id);
         var balance = await _nearService.GetFtBalanceAsync(id);
         return Ok(balance);
     }
