@@ -11,7 +11,6 @@ public class NearService
         _httpClient = httpClient;
     }
 
-
   public async Task<string> GetFtMetadataAsync()
     {
         var rpcPayload = new NearRequest(){
@@ -21,14 +20,11 @@ public class NearService
                 argsBase64: "e30="
             )
         };
-
-        //Convert to JSON using NewtonSoft JSON lib
-        var json = JsonSerializer.Serialize(rpcPayload); 
-
-        //Format content for sending
-        var content = new StringContent(json, Encoding.UTF8, "application/json");    
         
-        //Send request to NEAR
+        var json = JsonSerializer.Serialize(rpcPayload); 
+        var content = new StringContent(json, Encoding.UTF8, "application/json");  
+
+        
         try
         {
             var response = await _httpClient.PostAsync("https://rpc.testnet.near.org", content);
