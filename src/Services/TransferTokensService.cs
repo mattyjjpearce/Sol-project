@@ -26,7 +26,7 @@ public class TransferTokensService
 public  RequestResult<string> TransferTokens()
 {
   
-    var wallet = new Wallet("adult audit laugh allow roast exchange lady chef faith online punch stairs");
+    var wallet = new Wallet("PRIVATE PASS PHRASE :)");
     var rpcClient = ClientFactory.GetClient(Cluster.DevNet);
     var publicKey = wallet.Account.PublicKey;
     string destinationAddress = "CXkJGmdFHfWMxNnGYxndnL4DHb37QqJTkRaM5JWkDCzd";
