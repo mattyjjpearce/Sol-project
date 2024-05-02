@@ -1,3 +1,4 @@
+using blockchain_test.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlockchainApi.Controllers;
@@ -6,29 +7,31 @@ namespace BlockchainApi.Controllers;
 [Route("/api/blockchain")]
 public class NearController : ControllerBase
 {
-    private readonly NearService _nearService;
+    private readonly TransferTokensService _transferTokenService;
 
-    public NearController(NearService nearService)
+    public NearController(TransferTokensService transferTokenService)
     {
-        _nearService = nearService;
+        _transferTokenService = transferTokenService;
     }
 
     
 
-    [HttpGet("metadata")]
+    [HttpGet("transaction")]
     public async Task<IActionResult> GetFtMetadata()
     {
-        var metadata = await _nearService.GetFtMetadataAsync();
+        var metadata =  _transferTokenService.TransferTokens();
 
-        return Ok(metadata);
+        return Ok();
     }
 
-    [HttpGet("{id}/balance")]
-    public async Task<IActionResult> GetBalance(string id)
-    {
-        var balance = await _nearService.GetFtBalanceAsync(id);
-        return Ok(balance);
-    }
+
+
+    // [HttpGet("{id}/balance")]
+    // public async Task<IActionResult> GetBalance(string id)
+    // {
+    //     var balance = await _nearService.GetFtBalanceAsync(id);
+    //     return Ok(balance);
+    // }
 
     // [HttpPost("{id}/account")]
     // public async Task<IActionResult> CreateAccount(string subAccountName, string masterAccountName)
