@@ -51,7 +51,7 @@ public  RequestResult<string> TransferTokens()
             destinationTokenAccount,
             amount,
             publicKey// This is the authority's public key, required to authorize the transfer
-            )) // Signer account needed to authorize the transfer
+            )) 
         .Build(wallet.Account);
 
     Console.WriteLine(transaction);
@@ -62,49 +62,6 @@ public  RequestResult<string> TransferTokens()
 
     return result;
 
-
-    // string toWalletAddress = "DrRHHgKqiY6msgkCon7VwmVtEf7vW8J9KhvymH3Z24Lv";
-    // Wallet toWallet = new Wallet(toWalletAddress);
-    // Wallet fromWallet = new Wallet("CpaGH14v7XdbAPEATWNtx1mGEXWjD6V71zaFwCfL2SRr");
-
-    // Account fromAccount = fromWallet.GetAccount(10);
-    // PublicKey toPublicKey = toWallet.GetAccount(0).PublicKey;
-
-    // string tokenAddress = "Ead2p8MbCNcU1eREpAsBhwrD2haMtHSuWmYMsjHeZCyF"; // Replace <token_address> with your token address
-    // ulong amountToSend = 100; // Adjust the amount of tokens to send as needed
-
-
-
-    // var tx = new TransactionBuilder()
-    //     .SetFeePayer(fromAccount)
-    //     .AddInstruction(TokenProgram.Transfer(
-    //         fromAccount.PublicKey,
-    //         toPublicKey,
-    //         amountToSend,
-    //         fromAccount.PublicKey
-    //         ))
-    //     .Build(fromAccount);
-
-    // RequestResult<ResponseValue<SimulationLogs>> txSim = await rpcClient.SimulateTransactionAsync(tx);
-    // Console.WriteLine($"Transaction Simulation:\n\tError: {txSim.Result.Value.Error}");
-
-    // if (txSim.Result.Value.Error != null)
-    // {
-    //     Console.WriteLine($"Simulation failed with error: {txSim.Result.Value.Error}");
-    //     return null;
-    // }
-
-    // RequestResult<string> firstSig = await rpcClient.SendTransactionAsync(tx);
-    // if (firstSig.WasSuccessful)
-    // {
-    //     Console.WriteLine($"First Tx Signature: {firstSig.Result}");
-    // }
-    // else
-    // {
-    //     Console.WriteLine($"Sending transaction failed with error: {firstSig.ErrorData.ToString}");
-    // }
-
-    // return firstSig;
 }
 
     
